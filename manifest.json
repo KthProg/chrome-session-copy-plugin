@@ -1,17 +1,14 @@
 {
   "name": "Session Copy Plugin",
   "description": "Copies session data from one tab to another",
-  "version": "1.0",
+  "version": "1.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
   },
   "options_page": "options.html",
   "permissions": ["storage", "tabs", "scripting"],
-  "host_permissions": [
-    "*://localhost/",
-    "*://wwwqa2-couk.brandeulb.ford.com/"
-  ],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

@@ -16,10 +16,10 @@ function handleToUrlChange(event) {
 
 function initButton(property, handler){
   chrome.storage.sync.get(property, (fromUrlData) => {
-    let fromUrl = fromUrlData.fromUrl;
+    let url = fromUrlData[property];
 
     let input = document.getElementById(property);
-    input.value = fromUrl;
+    input.value = url;
 
     input.addEventListener("change", handler);
   });
