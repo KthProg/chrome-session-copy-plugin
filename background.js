@@ -1,3 +1,3 @@
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('installed');
+  // TODO: initialize store to have empty list of to and from URLs
 });
