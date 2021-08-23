@@ -6,7 +6,7 @@ Enter your from and to url patterns on the extension options page, then open the
 
 Match patterns for URLs: https://developer.chrome.com/docs/extensions/mv3/match_patterns/
 
-To go from www.a.com to localhost for instance, you would type *://www.a.com/* and *://localhost/*. You cannot specify the port for localhost.
+To go from www.a.com to localhost for instance, you would type \*://www.a.com/\* and \*://localhost/\*. You cannot specify the port for localhost.
 
 ![image](https://user-images.githubusercontent.com/3527476/130512878-3dd69d1a-7ece-4be2-ba1c-54b93bb64bc6.png)
 
