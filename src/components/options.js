@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 export const Options = () => {
-    const [urlList, setUrlList] = useState({});
+    const [urlList, setUrlList] = useState([]);
     const [selectedFromUrl, setSelectedFromUrl] = useState('');
     
     useEffect(() => {

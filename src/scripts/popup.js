@@ -2,8 +2,8 @@ const copySessionButton = document.getElementById('copySession');
 
 copySessionButton.addEventListener('click', async () => {
   chrome.storage.sync.get(['urlList', 'selectedFromUrl'], async ({ urlList, selectedFromUrl }) => {
-    const fromUrl = selectedFromUrl;
-    const toUrl = urlList[fromUrl];
+    const item = urlList.find(l => l.key === selectedFromUrl);
+    const { fromUrl, toUrl } = item;
 
     const [tabFrom] = await chrome.tabs.query({ url: fromUrl });
     const [tabTo] = await chrome.tabs.query({ url: toUrl });
