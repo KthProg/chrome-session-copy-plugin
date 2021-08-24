@@ -1,3 +1,5 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     entry: {
         background: './src/scripts/background.js',
@@ -19,5 +21,10 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: ['./src/manifest.json']
+        })
+    ]
 };
