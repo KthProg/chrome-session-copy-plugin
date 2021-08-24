@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
 export default Options = () => {
     const [urlList, setUrlList] = useState({});
@@ -50,14 +50,14 @@ export default Options = () => {
 
     return <>
         {
-            Object.keys(urlList).map(fromUrl => {
+            Object.keys(urlList).map((fromUrl) => {
                 const toUrl = urlList[fromUrl];
                 return <div key={fromUrl}>
                     <button class="select-item" onClick={() => selectItem(fromUrl)} />
                     <input type="text" value={fromUrl} onChange={(event) => fromUrlChanged(event.target.value, fromUrl, toUrl)} />
                     <input type="text" value={toUrl} onChange={(event) => toUrlChanged(event.target.value, fromUrl)} />
                     <button class="remove-item" onClick={() => removeItem(fromUrl)} />
-                <div/>;
+                </div>;
             })
         }
         <button onClick={addNewItem}>Add new URLs</button>
