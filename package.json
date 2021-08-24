@@ -1,0 +1,42 @@
+{
+  "name": "chrome-session-copy-plugin",
+  "version": "1.2.0",
+  "description": "Chrome plugin to copy session between tabs",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "zip": "zip -r dist.zip dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KthProg/chrome-session-copy-plugin.git"
+  },
+  "keywords": [
+    "chrome",
+    "plugin"
+  ],
+  "author": "Kyle Hooks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KthProg/chrome-session-copy-plugin/issues"
+  },
+  "homepage": "https://github.com/KthProg/chrome-session-copy-plugin#readme",
+  "dependencies": {
+    "core-js": "^3.16.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.56",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^9.0.1",
+    "terser-webpack-plugin": "^5.1.4",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}

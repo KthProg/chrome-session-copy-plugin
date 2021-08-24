@@ -1,7 +1,7 @@
 {
   "name": "Session Copy Plugin",
   "description": "Copies session data from one tab to another",
-  "version": "1.2",
+  "version": "2.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
