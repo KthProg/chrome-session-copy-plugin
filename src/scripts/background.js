@@ -1,3 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
-  // TODO: initialize store to have empty list of to and from URLs
+  chrome.storage.sync.get('urlList', ({ urlList = {} }) => {
+    chrome.storage.sync.set({
+        urlList,
+    });
+  });
 });
