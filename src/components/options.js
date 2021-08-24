@@ -9,21 +9,20 @@ export const Options = () => {
             setUrlList(urlList);
         });
         chrome.storage.sync.get('selectedFromUrl', ({ selectedFromUrl }) => {
-            setSelectedFromUrl(urlList);
+            setSelectedFromUrl(selectedFromUrl);
         });
     }, []);
 
-    const fromUrlChanged = useCallback((newFromUrl, fromUrl, toUrl) => {
-        removeItem(fromUrl);
-        urlList[newFromUrl] = toUrl;
+    const fromUrlChanged = useCallback((fromUrl, urls) => {
+        urls.fromUrl = fromUrl;
         chrome.storage.sync.set({
             urlList,
         });
         setUrlList(urlList);
     }, []);
 
-    const toUrlChanged = useCallback((newToUrl, fromUrl) => {
-        urlList[fromUrl] = newToUrl;
+    const toUrlChanged = useCallback((newToUrl, urls) => {
+        urls.toUrl = newToUrl;
         chrome.storage.sync.set({
             urlList,
         });
@@ -31,38 +30,42 @@ export const Options = () => {
     }, []);
 
     const addNewItem = useCallback(() => {
-        urlList[''] = '';
+        urlList.push({
+            fromUrl: '',
+            toUrl: '',
+            key: new Date().toISOString()
+        });
         chrome.storage.sync.set({
             urlList,
         });
         setUrlList(urlList);
     }, []);
 
-    const removeItem = useCallback((fromUrl) => {
-        delete urlList[fromUrl];
+    const removeItem = useCallback((key) => {
+        const newList = urlList.filter(l => l.key !== key);
         chrome.storage.sync.set({
-            urlList,
+            urlList: newList,
         });
-        setUrlList(urlList);
+        setUrlList(newList);
     }, []);
 
-    const selectItem = useCallback((fromUrl) => {
+    const selectItem = useCallback((key) => {
         chrome.storage.sync.set({
-            selectedFromUrl: fromUrl,
+            selectedFromUrl: key,
         });
     }, []);
 
     return <>
         {
-            Object.keys(urlList).map((fromUrl) => {
-                const toUrl = urlList[fromUrl];
-                return <div key={fromUrl} className={selectedFromUrl === fromUrl ? 'selected' : ''}>
-                    <button class="select-item" onClick={() => selectItem(fromUrl)}>Select</button>
+            urlList.map((urls) => {
+                const { fromUrl, toUrl, key } = urls;
+                return <div key={key} className={selectedFromUrl === key ? 'selected' : ''}>
+                    <button class="select-item" onClick={() => selectItem(key)}>Select</button>
                     <label>From URL</label>
-                    <input type="text" value={fromUrl} onChange={(event) => fromUrlChanged(event.target.value, fromUrl, toUrl)} />
+                    <input type="text" value={fromUrl} onChange={(event) => fromUrlChanged(event.target.value, urls)} />
                     <label>To URL</label>
-                    <input type="text" value={toUrl} onChange={(event) => toUrlChanged(event.target.value, fromUrl)} />
-                    <button class="remove-item" onClick={() => removeItem(fromUrl)}>Remove</button>
+                    <input type="text" value={toUrl} onChange={(event) => toUrlChanged(event.target.value, urls)} />
+                    <button class="remove-item" onClick={() => removeItem(key)}>Remove</button>
                 </div>;
             })
         }
