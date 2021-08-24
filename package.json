@@ -23,11 +23,14 @@
   },
   "homepage": "https://github.com/KthProg/chrome-session-copy-plugin#readme",
   "dependencies": {
+    "core-js": "^3.16.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.56",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
