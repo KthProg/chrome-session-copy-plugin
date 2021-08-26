@@ -1,6 +1,6 @@
 {
   "name": "chrome-session-copy-plugin",
-  "version": "1.2.0",
+  "version": "2.0",
   "description": "Chrome plugin to copy session between tabs",
   "private": true,
   "scripts": {
