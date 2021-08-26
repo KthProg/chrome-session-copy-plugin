@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "zip": "zip -r dist.zip dist"
+    "build": "rm -R dist/* && webpack",
+    "zip": "rm dist.zip && zip -r dist.zip dist"
   },
   "repository": {
     "type": "git",

@@ -2,8 +2,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    devtool: 'cheap-module-source-map',
+    // mode: 'development',
+    // devtool: 'cheap-module-source-map',
     entry: {
         background: './src/scripts/background.js',
         options: './src/scripts/options.js',
