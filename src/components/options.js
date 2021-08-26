@@ -2,14 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 export const Options = () => {
     const [urlList, setUrlList] = useState([]);
-    const [selectedFromUrl, setSelectedFromUrl] = useState('');
+    const [key, setKey] = useState('');
     
     useEffect(() => {
-        chrome.storage.sync.get('urlList', ({ urlList }) => {
+        chrome.storage.sync.get(['urlList', 'key'], ({ urlList, key }) => {
             setUrlList(urlList);
-        });
-        chrome.storage.sync.get('selectedFromUrl', ({ selectedFromUrl }) => {
-            setSelectedFromUrl(selectedFromUrl);
+            setKey(key);
         });
     }, []);
 
@@ -35,13 +33,15 @@ export const Options = () => {
 
     const addNewItem = useCallback(() => {
         const newList = urlList.map(l => l);
+        const key = new Date().toISOString();
         newList.push({
             fromUrl: '',
             toUrl: '',
-            key: new Date().toISOString()
+            key,
         });
         chrome.storage.sync.set({
             urlList: newList,
+            key: newList.length === 1 ? key : ''
         });
         setUrlList(newList);
     }, [urlList]);
@@ -56,22 +56,22 @@ export const Options = () => {
 
     const selectItem = useCallback((key) => {
         chrome.storage.sync.set({
-            selectedFromUrl: key,
+            key,
         });
-        setSelectedFromUrl(key);
+        setKey(key);
     }, []);
 
     return <>
         {
             urlList.map((urls) => {
-                const { fromUrl, toUrl, key } = urls;
-                return <div key={key} className={selectedFromUrl === key ? 'selected' : ''}>
-                    <button className="select-item" onClick={() => selectItem(key)}>Select</button>
+                const { fromUrl, toUrl, key: thisKey } = urls;
+                return <div key={thisKey} className={key === thisKey ? 'selected' : ''}>
+                    <button className="select-item" onClick={() => selectItem(thisKey)}>Select</button>
                     <label>From URL</label>
-                    <input type="text" value={fromUrl} onChange={(event) => fromUrlChanged(event.target.value, key)} />
+                    <input type="text" value={fromUrl} onChange={(event) => fromUrlChanged(event.target.value, thisKey)} />
                     <label>To URL</label>
-                    <input type="text" value={toUrl} onChange={(event) => toUrlChanged(event.target.value, key)} />
-                    <button className="remove-item" onClick={() => removeItem(key)}>Remove</button>
+                    <input type="text" value={toUrl} onChange={(event) => toUrlChanged(event.target.value, thisKey)} />
+                    <button className="remove-item" onClick={() => removeItem(thisKey)}>Remove</button>
                 </div>;
             })
         }
